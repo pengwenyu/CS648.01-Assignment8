@@ -26,10 +26,15 @@ window.onload = function(){
     addparagraph.style.fontWeight="bold";
     document.body.appendChild(addparagraph);
     //form
+    var box = document.createElement("div");
+    box.style.width="500px";
+    box.style.height="200px";
+    box.style.display="flex";
+    box.style.flexDirection="row";
+    document.body.appendChild(box);
     
     var form = document.createElement("div");
     form.style.width = "300px";
-    document.body.appendChild(form);
     // 3 inputs
     for (i = 0; i<labels.length; i++) {
         var inputs = document.createElement("div");
@@ -48,6 +53,7 @@ window.onload = function(){
         inputs.appendChild(input);
         form.appendChild(inputs);
     }
+    box.appendChild(form);
     // add button
     var div = document.createElement("div");
     div.style.clear = "right";
@@ -65,6 +71,19 @@ window.onload = function(){
     div.appendChild(addButton);
     form.appendChild(div);
 
+    // handling error message
+    var errorDiv = document.createElement("div");
+    errorDiv.id = "errorDiv";
+    errorDiv.style.width="250px";
+    document.body.appendChild(errorDiv);
+    for (var i = 0; i<labels.length; i++) {
+        var error = document.createElement("p");
+        error.id = labels[i]+"Error";
+        error.style.color = "red";
+        error.style.margin="2px 10px 23px 10px";
+        $("errorDiv").appendChild(error);
+    }
+    box.appendChild(errorDiv);
     // display how many employee
     var text = document.createElement("p");
     text.innerHTML = "Showing " +employees.length + " Employees";
@@ -112,16 +131,7 @@ window.onload = function(){
 
     // show data in the table
     displayData();
-    // handling error message
-    var errorDiv = document.createElement("div");
-    errorDiv.id = "errorDiv";
-    document.body.appendChild(errorDiv);
-    for (var i = 0; i<labels.length; i++) {
-        var error = document.createElement("p");
-        error.id = labels[i]+"Error";
-        error.style.color = "red";
-        $("errorDiv").appendChild(error);
-    }
+
     //delete function
     document.body.addEventListener('click', function (event) {
         window.console.log(event.id);
